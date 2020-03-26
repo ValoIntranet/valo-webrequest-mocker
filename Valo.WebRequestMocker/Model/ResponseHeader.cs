@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Valo.WebRequestMocker.Model
+{
+    public class ResponseHeader
+    {
+        public string SchemaVersion { get; set; } = "15.0.0.0";
+        public string LibraryVersion { get; set; } = "16.0.10355.20000";
+        public string ErrorInfo { get; set; }
+        public string TraceCorrelationId { get; set; } = "3aa6409f-0e7b-10e2-4775-0f0cc16c6f95";
+    }
+}
