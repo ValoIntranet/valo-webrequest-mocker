@@ -28,7 +28,17 @@ namespace Valo.WebRequestMocker.Helpers
             BaseStream = baseStream;
         }
 
-        public override long Position { get; set; }
+        public override long Position
+        {
+            get
+            {
+                return BaseStream.Position;
+            }
+            set
+            {
+                BaseStream.Position = value;
+            }
+        }
 
         public override void Flush()
         {

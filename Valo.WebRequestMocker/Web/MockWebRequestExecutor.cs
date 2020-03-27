@@ -80,6 +80,10 @@ namespace Valo.WebRequestMocker.Web
                     responseString = ResponseProvider.GetResponse(RequestUrl, RequestMethod.ToString(), requestBody);
                     //remove duplicated escape characters (possible due to anonymous guid serializtion)
                     responseString = responseString.Replace("\\\\/", "\\/");
+                    //however add \ for Guids and Dates the expectedformat is Id: "\/Guid(...)\/"
+                    responseString = responseString.Replace("\"/Guid(", "\"\\/Guid(");
+                    responseString = responseString.Replace("\"/Date(", "\"\\/Date(");
+                    responseString = responseString.Replace(")/\"", ")\\/\"");
                     responseContentType = "application/json";
                 }
             }

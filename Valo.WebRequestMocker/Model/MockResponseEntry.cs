@@ -9,6 +9,10 @@ namespace Valo.WebRequestMocker.Model
 {
     public class MockResponseEntry<T>
     {
+        public static JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        {
+            DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+        };
         /// <summary>
         /// Absolute url of web service called
         /// </summary>
@@ -33,11 +37,12 @@ namespace Valo.WebRequestMocker.Model
         /// <summary>
         /// Serialized return value
         /// </summary>
+        [JsonIgnore]
         public string SerializedReturnValue
         {
             get
             {
-                return JsonConvert.SerializeObject(ReturnValue);
+                return JsonConvert.SerializeObject(ReturnValue, SerializerSettings);
             }
         }
         public T ReturnValue { get; set; }

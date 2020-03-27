@@ -12,7 +12,7 @@ namespace Valo.WebRequestMocker.Web
 {
     public class MockEntryResponseProvider<T> : IMockResponseProvider
     {
-        public List<MockResponseEntry<T>> ResponseEntries { get; } = new List<MockResponseEntry<T>>();
+        public List<MockResponseEntry<T>> ResponseEntries { get; set; } = new List<MockResponseEntry<T>>();
         protected List<MockResponseEntry<T>> CurrentUrlResponses { get; set; }
         public ResponseHeader ResponseHeader { get; set; }
         public MockEntryResponseProvider(ResponseHeader responseHeader)

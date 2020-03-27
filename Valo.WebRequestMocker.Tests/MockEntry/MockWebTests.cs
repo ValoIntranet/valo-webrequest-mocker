@@ -1,5 +1,6 @@
 ﻿using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,43 @@ namespace Valo.WebRequestMocker.Tests.MockEntry
                 Assert.AreEqual("Test Web", context.Web.Title);
                 Assert.AreEqual("SitePages/Home.aspx", context.Web.WelcomePage);
                 Assert.AreEqual(Guid.Parse("73131455-6953-4d5a-bc42-e5fb2db96a98"), context.Web.Id);
+
+            }
+        }
+        [TestMethod]
+        public void MockEntryResponseProvider_Web_Test_GetWeb_FromSerializedResponse()
+        {
+            MockEntryResponseProvider provider = new MockEntryResponseProvider();
+            provider.ResponseEntries.Add(new MockResponseEntry()
+            {
+                Url = TestSiteUrl,
+                PropertyName = "Web",
+                ReturnValue = new
+                {
+                    _ObjectType_ = "SP.Web",
+                    _ObjectIdentity_ = "0edd429f-de47-10e2-4775-04221679c70e|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:73131455-6953-4d5a-bc42-e5fb2db96a98:web:063ab9e0-f62f-4890-a35c-91c87f3be681",
+                    AllowRssFeeds = true,
+                    AlternateCssUrl = "",
+                    AppInstanceId = "\\/Guid(00000000-0000-0000-0000-000000000000)\\/",
+                    Configuration = 0,
+                    Created = "\\/Date(2019,10,1,8,21,27,0)\\/",
+                    Id = "\\/Guid(063ab9e0-f62f-4890-a35c-91c87f3be681)\\/",
+                    Title = "Tea Point",
+                    WebTemplate = "SITEPAGEPUBLISHING",
+                    WelcomePage = "SitePages/Home.aspx",
+                    LastItemModifiedDate = "\\/Date(1585222338000)\\/"
+                }
+            });
+            using (ClientContext context = new ClientContext(TestSiteUrl))
+            {
+                context.WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider);
+                context.Load(context.Web);
+                context.ExecuteQuery();
+
+                Assert.AreEqual("Tea Point", context.Web.Title);
+                Assert.AreEqual("SitePages/Home.aspx", context.Web.WelcomePage);
+                Assert.AreEqual(2019, context.Web.Created.Year);
+                Assert.AreEqual(Guid.Parse("063ab9e0-f62f-4890-a35c-91c87f3be681"), context.Web.Id);
 
             }
         }

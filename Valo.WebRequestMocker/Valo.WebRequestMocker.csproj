@@ -90,18 +90,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ComposedStream.cs" />
+    <Compile Include="Helpers\FileMockDataRepo.cs" />
+    <Compile Include="Helpers\IMockDataRepo.cs" />
+    <Compile Include="Helpers\MockDataCreator.cs" />
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\CSOMRequest.cs" />
     <Compile Include="Model\Identity.cs" />
     <Compile Include="Model\MockResponseEntry.cs" />
     <Compile Include="Model\ActionObjectPath.cs" />
+    <Compile Include="Model\RequestExecutedArgs.cs" />
     <Compile Include="Model\ResponseHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\ComposedWebRequestExecutor.cs" />
     <Compile Include="Web\DictionaryResponseProvider.cs" />
     <Compile Include="Web\IMockResponseProvider.cs" />
     <Compile Include="Web\MockEntryResponseProvider.cs" />
     <Compile Include="Web\MockWebRequestExecutor.cs" />
     <Compile Include="Web\MockWebRequestExecutorFactory.cs" />
+    <Compile Include="Web\SPWebRequestExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
