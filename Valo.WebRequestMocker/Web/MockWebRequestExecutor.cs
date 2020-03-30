@@ -87,7 +87,7 @@ namespace Valo.WebRequestMocker.Web
                     responseContentType = "application/json";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 statusCode = HttpStatusCode.InternalServerError;
                 responseString = ex.Message;

@@ -20,7 +20,7 @@ namespace Valo.WebRequestMocker.Tests
 
                 MockEntryResponseProvider provider = new MockEntryResponseProvider();
                 FileMockDataRepo repo = new FileMockDataRepo("Mock.json");
-                MockWebRequestExecutorFactory executorFactory = new MockWebRequestExecutorFactory(provider, false, repo);
+                MockWebRequestExecutorFactory executorFactory = new MockWebRequestExecutorFactory(provider, true, repo);
                 executorFactory.OnRequestExecuted += ExecutorFactory_OnRequestExecuted;
                 context.WebRequestExecutorFactory = executorFactory;
                 context.Load(context.Web);

@@ -91,6 +91,15 @@ namespace Valo.WebRequestMocker.Model
                     entry.Method == pathMethod.Name);
                 return contextEntry.SerializedReturnValue;
             }
+            else if (identity is Identity)
+            {
+                MockResponseEntry<T> contextEntry = responseEntries.FirstOrDefault(entry =>
+                    entry.PropertyName == identity.Name);
+                if (contextEntry != null)
+                {
+                    return contextEntry.SerializedReturnValue;
+                }
+            }
             return base.GetResponse<T>(identity, responseEntries, request);
         }
     }
@@ -120,6 +129,10 @@ namespace Valo.WebRequestMocker.Model
             MockResponseEntry<T> contextEntry = responseEntries.First(entry =>
                 entry.Method == this.Name
                 && entry.NameValueParameters.All(methodParam => this.Parameters.Any(param => param.Value == methodParam.Value)));
+            if(contextEntry.ReturnValue == null)
+            {
+
+            }
             return contextEntry.SerializedReturnValue;
         }
     }

@@ -19,10 +19,21 @@ namespace Valo.WebRequestMocker.Model
         public MockResponseEntry GenerateMock(string responseBody, string calledUrl)
         {
             List<object> possibleResponses = JsonConvert.DeserializeObject<List<object>>(responseBody);
-            object responseId = possibleResponses.First(FindResponse);
-            object associatedResponse = possibleResponses[possibleResponses.IndexOf(responseId) + 1];
+            object responseId = possibleResponses.FirstOrDefault(FindResponse);
+            object associatedResponse = null;
+            if (responseId != null)
+            {
+                associatedResponse = possibleResponses[possibleResponses.IndexOf(responseId) + 1];
+            }
+            if (ObjectPath != null)
+            {
+                return ObjectPath.CreateMockResponse(associatedResponse, Action, calledUrl);
+            }
+            else
+            {
 
-            return ObjectPath.CreateMockResponse(associatedResponse, Action, calledUrl);
+                return null;
+            }
         }
 
         private bool FindResponse(object response)

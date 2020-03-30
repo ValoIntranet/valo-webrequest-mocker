@@ -62,7 +62,7 @@ namespace Valo.WebRequestMocker.Web
             List<ActionObjectPath<T>> result = new List<ActionObjectPath<T>>();
             foreach (BaseAction action in request.Actions)
             {
-                Identity associatedIdentity = request.ObjectPaths.First(path => path.Id == action.ObjectPathId);
+                Identity associatedIdentity = request.ObjectPaths.FirstOrDefault(path => path.Id == action.ObjectPathId);
 
                 result.Add(new ActionObjectPath<T>()
                 {
